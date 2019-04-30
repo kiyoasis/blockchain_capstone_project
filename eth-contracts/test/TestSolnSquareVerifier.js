@@ -13,15 +13,10 @@ contract('SolnSquareVerifier', accounts => {
 
     let tokenId = 1;
 
-    //beforeEach(async function () {
+    // FYI: It is not beforeEach
     before(async function () {
         var verifier = await Verifier.new({from: account_one});
         this.contract = await SolnSquareVerifier.new(verifier.address, {from: account_one});
-    })
-
-    it('Test if a new solution can be added for contract - SolnSquareVerifier', async function () { 
-
-
     })
 
     it('Test if an ERC721 token can be minted for contract - SolnSquareVerifier', async function () { 
@@ -40,10 +35,33 @@ contract('SolnSquareVerifier', accounts => {
 
         let ownerOfTokenId = await this.contract.ownerOf(tokenId);
         assert.equal(ownerOfTokenId, account_two, "Error owner does not match");
+    })
 
-        // await this.contract.SolutionAdded((err, transaction) => {
-        //     console.log(err, transaction);
-        //  })
+    it('A repeated solution cannot be added', async function () { 
 
+        let isAdded = true;
+        let errorReason = '';
+        
+        // Trying to add the same solution above
+        try {
+            await this.contract.mintVerifiedTokenTo(account_two, tokenId,
+                proof.A,
+                proof.A_p,
+                proof.B,
+                proof.B_p,
+                proof.C,
+                proof.C_p,
+                proof.H,
+                proof.K,
+                input,
+                {from: account_one});
+        } catch(e) {
+            //console.log(e.reason);
+            errorReason = e.reason;
+            isAdded = false;
+        }
+        
+        assert.equal(isAdded, false, "A repeated solution is added");
+        assert.equal(errorReason, 'tokenId already exists', "A repeated solution is added");
     })
 })
