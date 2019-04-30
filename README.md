@@ -24,9 +24,16 @@ And then migrate the compiled contracts:
 `truffle migrate`
 
 Then, test each file:
+
 `truffle test test/TestERC721Mintable.js`
+
 `truffle test test/TestSquareVerifier.js`
+
 `truffle test test/TestSolnSquareVerifier.js`
+
+For example, the test cases of TestSolnSquareVerifier.js pass as follows:
+
+<img src="images/TestSolnSquareVerifier.png" alt="drawing" width="600px"/>
 
 
 ## Renkeby Deployment
@@ -118,7 +125,7 @@ https://rinkeby.etherscan.io/address/0x15056286DAb7d2e59c5b95119803ea241078a945
 https://rinkeby.etherscan.io/tx/0xf008007aaf074fc44481ebbea55e05b8271f0b0d0852be557dc63ebb4b4b5041
 <!-- 0x0c38247aa6eb17473621b772ccd040c5b66adc742f5298e5df663eedc1e0e75c -->
 
-### contract's ABI:
+#### contract's ABI:
 See below for Appendix.
 <!-- ![](eth-contracts/build/contracts/SolnSquareVerifier.json)  -->
 
@@ -144,7 +151,6 @@ The DApp User Interface when running should look like...
 
 <!-- ![](images/UI.png) -->
 <img src="images/UI.png" alt="drawing" width="600px"/>
-
 
 In  order to mint 10 tokens, click the ```Mint 10 Tokens``` button on the UI.
 
